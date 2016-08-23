@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".Activities.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:background="@color/blueLight"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:text="@string/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/cart_content"
+            android:layout_alignParentRight="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+            <ImageView
+                android:contentDescription="Go to shopping cart"
+                android:src="@mipmap/ic_launcher"
+                android:layout_alignParentRight="true"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/count_selected_products"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="4dp"
+                android:gravity="center"
+                android:text="0"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_gravity="right"
+                android:background="@drawable/circle_background_red"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+
+        </FrameLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/fragment_container"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>
