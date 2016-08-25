@@ -58,7 +58,7 @@ public class RecyclerViewProducts extends RecyclerView.Adapter<RecyclerViewProdu
         holder.stockItems.setText(""+currentProduct.getStockItems());
         holder.stockItems.setContentDescription("Are "+currentProduct.getStockItems()+" items in stock");
         holder.rating.setText(""+currentProduct.getProductRating());
-        holder.rating.setText("The rating of "+currentProduct.getProductName()+ " is "+currentProduct.getProductRating());
+        holder.rating.setContentDescription("The rating of "+currentProduct.getProductName()+ " is "+currentProduct.getProductRating());
         holder.itemContainer.setContentDescription("Go to "+currentProduct.getProductName()+" detail");
         holder.itemContainer.setOnClickListener(new View.OnClickListener() {
             @Override

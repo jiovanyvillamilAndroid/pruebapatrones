@@ -43,7 +43,18 @@ public class ItemListFragment extends Fragment {
     private ArrayList<Product> getData(){
         ArrayList<Product> data = new ArrayList<>();
         for (int i=0;i<200;i++){
-            Product dummy = new Product(i,"name "+i,i*1000,"https://unsplash.it/300/300/?random","Una descripción larga",i,true,i*200);
+            //Product dummy = new Product(i,"name "+i,i*1000,"https://unsplash.it/300/300/?random","Una descripción larga",i,true,i*200);
+            Product dummy = new Product.ProductBuilder()
+                    .onSale(true)
+                    .productId(i)
+                    .productName("Name "+i)
+                    .productPrice(i*1000)
+                    .productImage("https://unsplash.it/300/300/?random")
+                    .productDescription("Una descripción")
+                    .productRating(4)
+                    .stockItems(20)
+                    .quantitySelectedItems(1)
+                    .build();
             data.add(dummy);
         }
         return data;
