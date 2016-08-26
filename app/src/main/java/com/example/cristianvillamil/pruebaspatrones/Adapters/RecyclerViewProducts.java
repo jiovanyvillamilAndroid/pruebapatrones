@@ -72,6 +72,10 @@ public class RecyclerViewProducts extends RecyclerView.Adapter<RecyclerViewProdu
         });
     }
 
+    /**
+     * Switch the fragments on MainActivity
+     * @param newFragment fragment to be changed
+     */
     private void switchFragment(Fragment newFragment) {
         if (context == null)
             return;
