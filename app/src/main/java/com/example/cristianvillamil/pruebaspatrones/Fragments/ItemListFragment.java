@@ -27,9 +27,9 @@ public class ItemListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = getLayoutInflater(savedInstanceState).inflate(R.layout.fragment_item_list,container,false);
-        RecyclerView productsRecycler = (RecyclerView)v.findViewById(R.id.recycler_view_products);
-        RecyclerViewProducts adapter = new RecyclerViewProducts(getData(),context);
+        View v = getLayoutInflater(savedInstanceState).inflate(R.layout.fragment_item_list, container, false);
+        RecyclerView productsRecycler = (RecyclerView) v.findViewById(R.id.recycler_view_products);
+        RecyclerViewProducts adapter = new RecyclerViewProducts(getData(), context);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
         productsRecycler.setLayoutManager(mLayoutManager);
         productsRecycler.setAdapter(adapter);
@@ -38,17 +38,18 @@ public class ItemListFragment extends Fragment {
 
     /**
      * Get data to show in fragment
+     *
      * @return list of products
      */
-    private ArrayList<Product> getData(){
+    private ArrayList<Product> getData() {
         ArrayList<Product> data = new ArrayList<>();
-        for (int i=0;i<200;i++){
+        for (int i = 0; i < 200; i++) {
             //Product dummy = new Product(i,"name "+i,i*1000,"https://unsplash.it/300/300/?random","Una descripción larga",i,true,i*200);
             Product dummy = new Product.ProductBuilder()
                     .onSale(true)
                     .productId(i)
-                    .productName("Name "+i)
-                    .productPrice(i*1000)
+                    .productName("Name " + i)
+                    .productPrice(i * 1000)
                     .productImage("https://unsplash.it/300/300/?random")
                     .productDescription("Una descripción")
                     .productRating(4)

@@ -20,12 +20,13 @@ import java.util.ArrayList;
 
 /**
  * @author Cristian.Villamil
- * Adapter that represent available products to shop
+ *         Adapter that represent available products to shop
  */
 public class RecyclerViewProducts extends RecyclerView.Adapter<RecyclerViewProducts.ProductViewHolder> {
     ArrayList<Product> data;
     Context context;
-    public RecyclerViewProducts(ArrayList<Product> data,Context context){
+
+    public RecyclerViewProducts(ArrayList<Product> data, Context context) {
         this.data = data;
         this.context = context;
     }
@@ -47,19 +48,19 @@ public class RecyclerViewProducts extends RecyclerView.Adapter<RecyclerViewProdu
         final Product currentProduct = data.get(position);
         holder.productTitle.setText(currentProduct.getProductName());
         holder.productTitle.setContentDescription(currentProduct.getProductName());
-        if(currentProduct.isOnSale()){
+        if (currentProduct.isOnSale()) {
             holder.saleText.setVisibility(View.VISIBLE);
-            holder.saleText.setContentDescription(currentProduct.getProductName()+" is on sale");
-        }else{
+            holder.saleText.setContentDescription(currentProduct.getProductName() + " is on sale");
+        } else {
             holder.saleText.setVisibility(View.INVISIBLE);
         }
-        holder.price.setText("$"+currentProduct.getProductPrice());
-        holder.price.setContentDescription("The price of "+currentProduct.getProductName()+" is "+currentProduct.getProductPrice());
-        holder.stockItems.setText(""+currentProduct.getStockItems());
-        holder.stockItems.setContentDescription("Are "+currentProduct.getStockItems()+" items in stock");
-        holder.rating.setText(""+currentProduct.getProductRating());
-        holder.rating.setContentDescription("The rating of "+currentProduct.getProductName()+ " is "+currentProduct.getProductRating());
-        holder.itemContainer.setContentDescription("Go to "+currentProduct.getProductName()+" detail");
+        holder.price.setText("$" + currentProduct.getProductPrice());
+        holder.price.setContentDescription("The price of " + currentProduct.getProductName() + " is " + currentProduct.getProductPrice());
+        holder.stockItems.setText("" + currentProduct.getStockItems());
+        holder.stockItems.setContentDescription("Are " + currentProduct.getStockItems() + " items in stock");
+        holder.rating.setText("" + currentProduct.getProductRating());
+        holder.rating.setContentDescription("The rating of " + currentProduct.getProductName() + " is " + currentProduct.getProductRating());
+        holder.itemContainer.setContentDescription("Go to " + currentProduct.getProductName() + " detail");
         holder.itemContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +75,7 @@ public class RecyclerViewProducts extends RecyclerView.Adapter<RecyclerViewProdu
 
     /**
      * Switch the fragments on MainActivity
+     *
      * @param newFragment fragment to be changed
      */
     private void switchFragment(Fragment newFragment) {
@@ -81,7 +83,7 @@ public class RecyclerViewProducts extends RecyclerView.Adapter<RecyclerViewProdu
             return;
         if (context instanceof MainActivity) {
             MainActivity mainActivity = (MainActivity) context;
-            mainActivity.changeFragment(newFragment,true);
+            mainActivity.changeFragment(newFragment, true);
         }
     }
 
@@ -101,12 +103,12 @@ public class RecyclerViewProducts extends RecyclerView.Adapter<RecyclerViewProdu
 
         public ProductViewHolder(View itemView) {
             super(itemView);
-            productTitle = (TextView)itemView.findViewById(R.id.productTitle);
-            saleText = (TextView)itemView.findViewById(R.id.saleTextView);
-            photo = (ImageView)itemView.findViewById(R.id.photo_item);
-            price = (TextView)itemView.findViewById(R.id.productPrice);
-            stockItems = (TextView)itemView.findViewById(R.id.stock_items_value);
-            rating = (TextView)itemView.findViewById(R.id.rating_text);
+            productTitle = (TextView) itemView.findViewById(R.id.productTitle);
+            saleText = (TextView) itemView.findViewById(R.id.saleTextView);
+            photo = (ImageView) itemView.findViewById(R.id.photo_item);
+            price = (TextView) itemView.findViewById(R.id.productPrice);
+            stockItems = (TextView) itemView.findViewById(R.id.stock_items_value);
+            rating = (TextView) itemView.findViewById(R.id.rating_text);
             itemContainer = itemView;
         }
     }

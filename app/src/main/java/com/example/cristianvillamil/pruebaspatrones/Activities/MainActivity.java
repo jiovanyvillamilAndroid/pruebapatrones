@@ -22,15 +22,16 @@ import java.util.Observer;
 public class MainActivity extends AppCompatActivity implements Observer {
     TextView badgeShopProducts;
     SingletonShopCart singletonShopCart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        badgeShopProducts = (TextView)findViewById(R.id.count_selected_products);
+        badgeShopProducts = (TextView) findViewById(R.id.count_selected_products);
         singletonShopCart = SingletonShopCart.getInstance();
         singletonShopCart.addObserver(MainActivity.this);
         setCartButtonLogic();
-        changeFragment(new ItemListFragment(),false);
+        changeFragment(new ItemListFragment(), false);
         onNewIntent(getIntent());
     }
 
@@ -40,23 +41,23 @@ public class MainActivity extends AppCompatActivity implements Observer {
         String action = intent.getAction();
         String data = intent.getDataString();
         if (Intent.ACTION_VIEW.equals(action) && data != null) {
-            Log.d("Entro al intent",data);
+            Log.d("Entro al intent", data);
         }
     }
 
     /**
      * Create the logic of the shopping cart
      */
-    public void setCartButtonLogic(){
-        FrameLayout cartContentToolbar = (FrameLayout)findViewById(R.id.cart_content);
+    public void setCartButtonLogic() {
+        FrameLayout cartContentToolbar = (FrameLayout) findViewById(R.id.cart_content);
         cartContentToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(singletonShopCart.getSelectedItems()>0){
-                    Intent i = new Intent(MainActivity.this,ShopCartActivity.class);
+                if (singletonShopCart.getSelectedItems() > 0) {
+                    Intent i = new Intent(MainActivity.this, ShopCartActivity.class);
                     startActivity(i);
-                }else{
-                    Toast.makeText(getApplicationContext(),"No purchased items",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "No purchased items", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -64,14 +65,15 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     /**
      * Change fragments inside MainActivity dynamically
-     * @param f Fragment that are going to be change
+     *
+     * @param f              Fragment that are going to be change
      * @param addToBackStack true to add to backstack otherwise false
      */
-    public void changeFragment(Fragment f,boolean addToBackStack){
+    public void changeFragment(Fragment f, boolean addToBackStack) {
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, f);
-        if(addToBackStack)fragmentTransaction.addToBackStack(null);
+        if (addToBackStack) fragmentTransaction.addToBackStack(null);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
     }
@@ -84,25 +86,27 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     /**
      * change the toolbar item counter
+     *
      * @param productsSize cantidad de productos
      */
-    private void changeCountItemsToolbar(int productsSize){
-        if(productsSize>99){
+    private void changeCountItemsToolbar(int productsSize) {
+        if (productsSize > 99) {
             badgeShopProducts.setText("99");
-        }else{
-            badgeShopProducts.setText(""+productsSize);
+        } else {
+            badgeShopProducts.setText("" + productsSize);
         }
-        badgeShopProducts.setContentDescription("You have "+productsSize+" items in shopping cart");
+        badgeShopProducts.setContentDescription("You have " + productsSize + " items in shopping cart");
     }
 
     /**
      * Event of any change to observable object
+     *
      * @param observable object that we are observing
-     * @param o object with parameters
+     * @param o          object with parameters
      */
     @Override
     public void update(Observable observable, Object o) {
-        SingletonShopCart singletonUpdated = (SingletonShopCart)observable;
+        SingletonShopCart singletonUpdated = (SingletonShopCart) observable;
         changeCountItemsToolbar(singletonUpdated.getSelectedItems());
     }
 }

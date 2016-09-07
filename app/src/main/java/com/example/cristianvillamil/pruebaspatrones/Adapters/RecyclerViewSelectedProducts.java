@@ -18,12 +18,13 @@ import java.util.LinkedHashMap;
 
 /**
  * @author cristian.villamil
- * Adapter that represent purchased items
+ *         Adapter that represent purchased items
  */
 public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerViewSelectedProducts.SelectedProductViewHolder> {
     ArrayList<Product> data;
     Context context;
-    public RecyclerViewSelectedProducts(ArrayList<Product> data,Context context){
+
+    public RecyclerViewSelectedProducts(ArrayList<Product> data, Context context) {
         this.data = data;
         this.context = context;
     }
@@ -45,10 +46,10 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         final Product currentProduct = data.get(position);
         holder.productTitle.setText(currentProduct.getProductName());
         holder.productTitle.setContentDescription(currentProduct.getProductName());
-        holder.price.setText("$"+currentProduct.getProductPrice());
-        holder.price.setContentDescription("The price of "+currentProduct.getProductName()+" is "+currentProduct.getProductPrice());
-        holder.itemQuantity.setText(""+currentProduct.getQuantitySelectedItems());
-        holder.itemQuantity.setContentDescription("The quantity is "+currentProduct.getQuantitySelectedItems());
+        holder.price.setText("$" + currentProduct.getProductPrice());
+        holder.price.setContentDescription("The price of " + currentProduct.getProductName() + " is " + currentProduct.getProductPrice());
+        holder.itemQuantity.setText("" + currentProduct.getQuantitySelectedItems());
+        holder.itemQuantity.setContentDescription("The quantity is " + currentProduct.getQuantitySelectedItems());
         holder.skipProduct.setContentDescription("Delete 1 quantity of this item");
         holder.skipProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,13 +72,14 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         TextView price;
         TextView itemQuantity;
         Button skipProduct;
+
         public SelectedProductViewHolder(View itemView) {
             super(itemView);
-            productTitle = (TextView)itemView.findViewById(R.id.item_name);
-            itemQuantity = (TextView)itemView.findViewById(R.id.item_quantity);
-            photo = (ImageView)itemView.findViewById(R.id.product_photo);
-            price = (TextView)itemView.findViewById(R.id.item_price);
-            skipProduct = (Button)itemView.findViewById(R.id.skip_product);
+            productTitle = (TextView) itemView.findViewById(R.id.item_name);
+            itemQuantity = (TextView) itemView.findViewById(R.id.item_quantity);
+            photo = (ImageView) itemView.findViewById(R.id.product_photo);
+            price = (TextView) itemView.findViewById(R.id.item_price);
+            skipProduct = (Button) itemView.findViewById(R.id.skip_product);
         }
     }
 }
