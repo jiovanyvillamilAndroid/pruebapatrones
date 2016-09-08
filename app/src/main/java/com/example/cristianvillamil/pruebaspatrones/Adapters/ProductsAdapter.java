@@ -10,25 +10,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.cristianvillamil.pruebaspatrones.Activities.MainActivity;
+import com.example.cristianvillamil.pruebaspatrones.activitycontainer.MainActivity;
 import com.example.cristianvillamil.pruebaspatrones.Fragments.ItemDetailFragment;
-import com.example.cristianvillamil.pruebaspatrones.Objects.Product;
+import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 import com.example.cristianvillamil.pruebaspatrones.R;
-import com.example.cristianvillamil.pruebaspatrones.Singleton.SingletonShopCart;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Cristian.Villamil
  *         Adapter that represent available products to shop
  */
-public class RecyclerViewProducts extends RecyclerView.Adapter<RecyclerViewProducts.ProductViewHolder> {
-    ArrayList<Product> data;
-    Context context;
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
+    List<Product> data;
+    OnClickEvent listener;
 
-    public RecyclerViewProducts(ArrayList<Product> data, Context context) {
+    public ProductsAdapter(List<Product> data) {
         this.data = data;
-        this.context = context;
     }
 
     @Override
@@ -64,28 +62,13 @@ public class RecyclerViewProducts extends RecyclerView.Adapter<RecyclerViewProdu
         holder.itemContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ItemDetailFragment itemDetailFragment = new ItemDetailFragment();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("product", currentProduct);
-                itemDetailFragment.setArguments(bundle);
-                switchFragment(itemDetailFragment);
+                if (listener != null) {
+                    listener.onProductClick(currentProduct);
+                }
             }
         });
     }
 
-    /**
-     * Switch the fragments on MainActivity
-     *
-     * @param newFragment fragment to be changed
-     */
-    private void switchFragment(Fragment newFragment) {
-        if (context == null)
-            return;
-        if (context instanceof MainActivity) {
-            MainActivity mainActivity = (MainActivity) context;
-            mainActivity.changeFragment(newFragment, true);
-        }
-    }
 
     @Override
     public int getItemCount() {
@@ -111,5 +94,13 @@ public class RecyclerViewProducts extends RecyclerView.Adapter<RecyclerViewProdu
             rating = (TextView) itemView.findViewById(R.id.rating_text);
             itemContainer = itemView;
         }
+    }
+
+    public void setListener(OnClickEvent listener){
+        this.listener = listener;
+    }
+
+    public interface OnClickEvent{
+        void onProductClick(Product product);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.cristianvillamil.pruebaspatrones.Objects;
+package com.example.cristianvillamil.pruebaspatrones.commons.domain;
 
 import java.io.Serializable;
 

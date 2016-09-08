@@ -1,6 +1,6 @@
 package com.example.cristianvillamil.pruebaspatrones.productslist.presenter;
 
-import com.example.cristianvillamil.pruebaspatrones.Objects.Product;
+import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 import com.example.cristianvillamil.pruebaspatrones.productslist.interactor.ProductsListInteractor;
 import com.example.cristianvillamil.pruebaspatrones.productslist.interactor.ProductsListInteractorImpl;
 import com.example.cristianvillamil.pruebaspatrones.productslist.view.ProductsList;
@@ -37,6 +37,6 @@ public class ProductsListPresenterImpl implements ProductsListPresenter,Products
 
     @Override
     public void onFailure(String message) {
-
+        view.showMessage(message);
     }
 }

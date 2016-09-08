@@ -9,12 +9,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.cristianvillamil.pruebaspatrones.Objects.Product;
+import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 import com.example.cristianvillamil.pruebaspatrones.R;
 import com.example.cristianvillamil.pruebaspatrones.Singleton.SingletonShopCart;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 /**
  * @author cristian.villamil

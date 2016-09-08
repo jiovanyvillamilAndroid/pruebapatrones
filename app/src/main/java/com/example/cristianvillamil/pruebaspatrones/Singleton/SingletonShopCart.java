@@ -1,12 +1,8 @@
 package com.example.cristianvillamil.pruebaspatrones.Singleton;
 
-import android.util.Log;
-
-import com.example.cristianvillamil.pruebaspatrones.Objects.Product;
+import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Observable;
 
 /**

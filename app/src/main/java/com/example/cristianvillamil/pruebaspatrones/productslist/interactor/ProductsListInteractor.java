@@ -1,6 +1,6 @@
 package com.example.cristianvillamil.pruebaspatrones.productslist.interactor;
 
-import com.example.cristianvillamil.pruebaspatrones.Objects.Product;
+import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 
 import java.util.List;
 

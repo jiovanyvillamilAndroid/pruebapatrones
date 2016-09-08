@@ -1,10 +1,8 @@
-package com.example.cristianvillamil.pruebaspatrones.Activities;
+package com.example.cristianvillamil.pruebaspatrones.activitycontainer;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,14 +10,17 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cristianvillamil.pruebaspatrones.Fragments.ItemListFragment;
+import com.example.cristianvillamil.pruebaspatrones.Activities.ShopCartActivity;
 import com.example.cristianvillamil.pruebaspatrones.R;
 import com.example.cristianvillamil.pruebaspatrones.Singleton.SingletonShopCart;
+import com.example.cristianvillamil.pruebaspatrones.commons.interfaces.TransactionFragments;
+import com.example.cristianvillamil.pruebaspatrones.productslist.view.ProductsListFragment;
 
 import java.util.Observable;
 import java.util.Observer;
 
-public class MainActivity extends AppCompatActivity implements Observer {
+public class MainActivity extends AppCompatActivity implements Observer,TransactionFragments {
+
     TextView badgeShopProducts;
     SingletonShopCart singletonShopCart;
 
@@ -31,7 +32,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
         singletonShopCart = SingletonShopCart.getInstance();
         singletonShopCart.addObserver(MainActivity.this);
         setCartButtonLogic();
-        changeFragment(new ItemListFragment(), false);
+        //changeFragment(new ItemListFragment(), false);
+        ProductsListFragment productsListFragment = new ProductsListFragment();
+        productsListFragment.addTransactionInterface(this);
+        switchFragment(productsListFragment, false);
         onNewIntent(getIntent());
     }
 
@@ -61,21 +65,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 }
             }
         });
-    }
-
-    /**
-     * Change fragments inside MainActivity dynamically
-     *
-     * @param f              Fragment that are going to be change
-     * @param addToBackStack true to add to backstack otherwise false
-     */
-    public void changeFragment(Fragment f, boolean addToBackStack) {
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, f);
-        if (addToBackStack) fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.commit();
     }
 
     @Override
@@ -108,5 +97,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
     public void update(Observable observable, Object o) {
         SingletonShopCart singletonUpdated = (SingletonShopCart) observable;
         changeCountItemsToolbar(singletonUpdated.getSelectedItems());
+    }
+
+    @Override
+    public void switchFragment(Fragment fragment, boolean addToBackStack) {
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_container, fragment);
+        if (addToBackStack) fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

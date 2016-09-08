@@ -1,6 +1,6 @@
 package com.example.cristianvillamil.pruebaspatrones.productslist.view;
 
-import com.example.cristianvillamil.pruebaspatrones.Objects.Product;
+import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 import com.example.cristianvillamil.pruebaspatrones.commons.interfaces.BaseActivity;
 
 import java.util.List;
@@ -16,6 +16,6 @@ public interface ProductsList extends BaseActivity {
 
     void showProductsList(List<Product> productList);
 
-    void showMessage();
+    void showMessage(String m);
 
 }

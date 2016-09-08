@@ -1,6 +1,6 @@
 package com.example.cristianvillamil.pruebaspatrones.productslist.interactor;
 
-import com.example.cristianvillamil.pruebaspatrones.Objects.Product;
+import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,12 @@ public class ProductsListInteractorImpl implements ProductsListInteractor{
         ArrayList<Product> productsList = new ArrayList<>();
         for (int i=0;i<100;i++){
             Product p = new Product.ProductBuilder()
-                    .onSale(false)
+                    .onSale((i & 1) == 0)
+                    .productId(i)
+                    .productName("Name "+i)
+                    .productRating(5)
+                    .stockItems(20)
+                    .productPrice(i*200)
                     .productDescription("Description "+i)
                     .build();
             productsList.add(p);

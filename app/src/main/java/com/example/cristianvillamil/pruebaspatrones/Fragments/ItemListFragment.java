@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.cristianvillamil.pruebaspatrones.Adapters.RecyclerViewProducts;
-import com.example.cristianvillamil.pruebaspatrones.Objects.Product;
+import com.example.cristianvillamil.pruebaspatrones.Adapters.ProductsAdapter;
+import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 import com.example.cristianvillamil.pruebaspatrones.R;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class ItemListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = getLayoutInflater(savedInstanceState).inflate(R.layout.fragment_item_list, container, false);
         RecyclerView productsRecycler = (RecyclerView) v.findViewById(R.id.recycler_view_products);
-        RecyclerViewProducts adapter = new RecyclerViewProducts(getData(), context);
+        ProductsAdapter adapter = new ProductsAdapter(getData());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
         productsRecycler.setLayoutManager(mLayoutManager);
         productsRecycler.setAdapter(adapter);
