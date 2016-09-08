@@ -11,13 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.cristianvillamil.pruebaspatrones.Adapters.ProductsAdapter;
-import com.example.cristianvillamil.pruebaspatrones.Fragments.ItemDetailFragment;
+import com.example.cristianvillamil.pruebaspatrones.productdetail.view.ItemDetailFragment;
 import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 import com.example.cristianvillamil.pruebaspatrones.R;
 import com.example.cristianvillamil.pruebaspatrones.commons.interfaces.TransactionFragments;
 import com.example.cristianvillamil.pruebaspatrones.productslist.presenter.ProductsListPresenterImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,7 +51,7 @@ public class ProductsListFragment extends Fragment implements ProductsList{
         addProductAdapterClickEvent();
     }
 
-    private void addProductAdapterClickEvent(){
+    private void addProductAdapterClickEvent() {
         adapter.setListener(new ProductsAdapter.OnClickEvent() {
             @Override
             public void onProductClick(Product product) {
@@ -99,7 +98,5 @@ public class ProductsListFragment extends Fragment implements ProductsList{
     }
 
     @Override
-    public void setEventsLogics() {
-
-    }
+    public void setEventsLogics() {}
 }

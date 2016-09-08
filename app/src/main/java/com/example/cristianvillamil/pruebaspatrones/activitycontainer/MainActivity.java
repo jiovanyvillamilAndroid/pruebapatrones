@@ -30,13 +30,16 @@ public class MainActivity extends AppCompatActivity implements Observer,Transact
         setContentView(R.layout.activity_main);
         badgeShopProducts = (TextView) findViewById(R.id.count_selected_products);
         singletonShopCart = SingletonShopCart.getInstance();
-        singletonShopCart.addObserver(MainActivity.this);
+        singletonShopCart.addObserver(this);
         setCartButtonLogic();
-        //changeFragment(new ItemListFragment(), false);
+        onNewIntent(getIntent());
+        setInitialFragment();
+    }
+
+    private void setInitialFragment() {
         ProductsListFragment productsListFragment = new ProductsListFragment();
         productsListFragment.addTransactionInterface(this);
         switchFragment(productsListFragment, false);
-        onNewIntent(getIntent());
     }
 
     @Override

@@ -29,7 +29,6 @@ public class ProductsListPresenterImpl implements ProductsListPresenter,Products
 
     }
 
-
     @Override
     public void onFinish(List<Product> products) {
         view.showProductsList(products);

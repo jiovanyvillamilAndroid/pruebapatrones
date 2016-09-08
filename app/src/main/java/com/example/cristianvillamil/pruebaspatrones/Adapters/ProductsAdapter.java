@@ -1,8 +1,5 @@
 package com.example.cristianvillamil.pruebaspatrones.Adapters;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.cristianvillamil.pruebaspatrones.activitycontainer.MainActivity;
-import com.example.cristianvillamil.pruebaspatrones.Fragments.ItemDetailFragment;
 import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 import com.example.cristianvillamil.pruebaspatrones.R;
 
@@ -22,6 +17,7 @@ import java.util.List;
  *         Adapter that represent available products to shop
  */
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
+
     List<Product> data;
     OnClickEvent listener;
 
@@ -36,37 +32,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
-        ProductViewHolder pvh = new ProductViewHolder(v);
-        return pvh;
+        return new ProductViewHolder(parent);
     }
 
     @Override
     public void onBindViewHolder(final ProductViewHolder holder, int position) {
-        final Product currentProduct = data.get(position);
-        holder.productTitle.setText(currentProduct.getProductName());
-        holder.productTitle.setContentDescription(currentProduct.getProductName());
-        if (currentProduct.isOnSale()) {
-            holder.saleText.setVisibility(View.VISIBLE);
-            holder.saleText.setContentDescription(currentProduct.getProductName() + " is on sale");
-        } else {
-            holder.saleText.setVisibility(View.INVISIBLE);
-        }
-        holder.price.setText("$" + currentProduct.getProductPrice());
-        holder.price.setContentDescription("The price of " + currentProduct.getProductName() + " is " + currentProduct.getProductPrice());
-        holder.stockItems.setText("" + currentProduct.getStockItems());
-        holder.stockItems.setContentDescription("Are " + currentProduct.getStockItems() + " items in stock");
-        holder.rating.setText("" + currentProduct.getProductRating());
-        holder.rating.setContentDescription("The rating of " + currentProduct.getProductName() + " is " + currentProduct.getProductRating());
-        holder.itemContainer.setContentDescription("Go to " + currentProduct.getProductName() + " detail");
-        holder.itemContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (listener != null) {
-                    listener.onProductClick(currentProduct);
-                }
-            }
-        });
+        holder.bind(data.get(position));
     }
 
 
@@ -76,6 +47,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
+
         TextView productTitle;
         TextView saleText;
         ImageView photo;
@@ -84,8 +56,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         TextView rating;
         View itemContainer;
 
-        public ProductViewHolder(View itemView) {
-            super(itemView);
+        public ProductViewHolder (ViewGroup parent) {
+            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false));
             productTitle = (TextView) itemView.findViewById(R.id.productTitle);
             saleText = (TextView) itemView.findViewById(R.id.saleTextView);
             photo = (ImageView) itemView.findViewById(R.id.photo_item);
@@ -94,6 +66,33 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             rating = (TextView) itemView.findViewById(R.id.rating_text);
             itemContainer = itemView;
         }
+
+        public void bind (final Product currentProduct) {
+            productTitle.setText(currentProduct.getProductName());
+            productTitle.setContentDescription(currentProduct.getProductName());
+            if (currentProduct.isOnSale()) {
+                saleText.setVisibility(View.VISIBLE);
+                saleText.setContentDescription(currentProduct.getProductName() + " is on sale");
+            } else {
+                saleText.setVisibility(View.INVISIBLE);
+            }
+            price.setText("$" + currentProduct.getProductPrice());
+            price.setContentDescription("The price of " + currentProduct.getProductName() + " is " + currentProduct.getProductPrice());
+            stockItems.setText("" + currentProduct.getStockItems());
+            stockItems.setContentDescription("Are " + currentProduct.getStockItems() + " items in stock");
+            rating.setText(String.valueOf(currentProduct.getProductRating()));
+            rating.setContentDescription("The rating of " + currentProduct.getProductName() + " is " + currentProduct.getProductRating());
+            itemContainer.setContentDescription("Go to " + currentProduct.getProductName() + " detail");
+            itemContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        listener.onProductClick(currentProduct);
+                    }
+                }
+            });
+        }
+
     }
 
     public void setListener(OnClickEvent listener){
