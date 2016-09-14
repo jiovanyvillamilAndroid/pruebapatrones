@@ -9,9 +9,12 @@ import java.util.List;
  */
 public interface ProductsListInteractor {
 
-    interface onFinishListener{
+    interface onFinishListener {
+
         void onFinish(List<Product> products);
+
         void onFailure(String message);
+
     }
 
     void getProductsData(final onFinishListener listener);

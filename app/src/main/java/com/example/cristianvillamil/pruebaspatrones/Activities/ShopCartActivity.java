@@ -1,16 +1,16 @@
 package com.example.cristianvillamil.pruebaspatrones.Activities;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cristianvillamil.pruebaspatrones.Adapters.RecyclerViewSelectedProducts;
 import com.example.cristianvillamil.pruebaspatrones.R;
 import com.example.cristianvillamil.pruebaspatrones.Singleton.SingletonShopCart;
+import com.example.cristianvillamil.pruebaspatrones.commons.adapters.PurchasedProductsAdapter;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -57,9 +57,9 @@ public class ShopCartActivity extends AppCompatActivity implements Observer {
      */
     private void makeRecyclerView() {
         RecyclerView listSelectedItems = (RecyclerView) findViewById(R.id.list_selected_items);
-        RecyclerViewSelectedProducts recyclerViewSelectedProducts = new RecyclerViewSelectedProducts(SingletonShopCart.getInstance().getSelectedProducts(), this);
+        PurchasedProductsAdapter purchasedProductsAdapter = new PurchasedProductsAdapter(SingletonShopCart.getInstance().getSelectedProducts(), this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        listSelectedItems.setAdapter(recyclerViewSelectedProducts);
+        listSelectedItems.setAdapter(purchasedProductsAdapter);
         listSelectedItems.setLayoutManager(layoutManager);
     }
 

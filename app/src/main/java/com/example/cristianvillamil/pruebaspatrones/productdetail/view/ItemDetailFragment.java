@@ -1,25 +1,24 @@
 package com.example.cristianvillamil.pruebaspatrones.productdetail.view;
 
-import android.support.v4.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 import com.example.cristianvillamil.pruebaspatrones.R;
 import com.example.cristianvillamil.pruebaspatrones.Singleton.SingletonShopCart;
+import com.example.cristianvillamil.pruebaspatrones.commons.activities.BaseFragment;
+import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 
 /**
  * Created by Jiovany on 16/08/2016.
  */
-public class ItemDetailFragment extends Fragment implements ItemDetail {
+public class ItemDetailFragment extends BaseFragment implements ItemDetail {
 
-    Context context;
     Product currentProduct;
     TextView productTitle;
     TextView isSaleTextView;
@@ -27,48 +26,24 @@ public class ItemDetailFragment extends Fragment implements ItemDetail {
     TextView selectedProducts;
     TextView stockItemsTextView;
     TextView description;
+    Button buyItem;
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.context = context;
-    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = getLayoutInflater(savedInstanceState).inflate(R.layout.item_detail_fragment, container, false);
         currentProduct = (Product) getArguments().get("product");
-        getUIElements(v);
+        initUI(v);
+        setEventsLogics();
         showDetail();
-        buyItemLogic(v);
         return v;
     }
 
-    /**
-     * Makes buy button logic
-     *
-     * @param v view constains widgets
-     */
-    private void buyItemLogic(View v) {
-        Button buyItem = (Button) v.findViewById(R.id.buy_item_button);
-        buyItem.setContentDescription("Purchase one " + currentProduct.getProductName());
-        buyItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SingletonShopCart.getInstance().addShopItem(currentProduct);
-            }
-        });
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        this.context = null;
-    }
 
     @Override
     public void showDetail() {
+        buyItem.setContentDescription("Purchase one " + currentProduct.getProductName());
         productTitle.setText(currentProduct.getProductName());
         productTitle.setContentDescription(currentProduct.getProductName());
         isSaleTextView.setContentDescription("Is on sale");
@@ -84,19 +59,24 @@ public class ItemDetailFragment extends Fragment implements ItemDetail {
     }
 
     @Override
-    public void getUIElements(@Nullable View view) {
-        if(view != null){
+    public void initUI(@Nullable View view) {
+        if (view != null) {
             productTitle = (TextView) view.findViewById(R.id.product_title);
             isSaleTextView = (TextView) view.findViewById(R.id.is_sale_text);
             itemPrice = (TextView) view.findViewById(R.id.item_price);
             selectedProducts = (TextView) view.findViewById(R.id.count_selected_products);
             stockItemsTextView = (TextView) view.findViewById(R.id.stock_items_value);
             description = (TextView) view.findViewById(R.id.description);
+            buyItem = (Button) view.findViewById(R.id.buy_item_button);
         }
     }
 
-    @Override
     public void setEventsLogics() {
-
+        buyItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SingletonShopCart.getInstance().addShopItem(currentProduct);
+            }
+        });
     }
 }

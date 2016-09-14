@@ -19,7 +19,7 @@ import com.example.cristianvillamil.pruebaspatrones.productslist.view.ProductsLi
 import java.util.Observable;
 import java.util.Observer;
 
-public class MainActivity extends AppCompatActivity implements Observer,TransactionFragments {
+public class MainActivity extends AppCompatActivity implements Observer, TransactionFragments {
 
     TextView badgeShopProducts;
     SingletonShopCart singletonShopCart;
@@ -37,9 +37,7 @@ public class MainActivity extends AppCompatActivity implements Observer,Transact
     }
 
     private void setInitialFragment() {
-        ProductsListFragment productsListFragment = new ProductsListFragment();
-        productsListFragment.addTransactionInterface(this);
-        switchFragment(productsListFragment, false);
+        switchFragment(new ProductsListFragment(), false);
     }
 
     @Override

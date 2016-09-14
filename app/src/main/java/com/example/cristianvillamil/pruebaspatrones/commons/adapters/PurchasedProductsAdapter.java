@@ -1,4 +1,4 @@
-package com.example.cristianvillamil.pruebaspatrones.Adapters;
+package com.example.cristianvillamil.pruebaspatrones.commons.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,9 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 import com.example.cristianvillamil.pruebaspatrones.R;
 import com.example.cristianvillamil.pruebaspatrones.Singleton.SingletonShopCart;
+import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 
 import java.util.ArrayList;
 
@@ -19,11 +19,11 @@ import java.util.ArrayList;
  * @author cristian.villamil
  *         Adapter that represent purchased items
  */
-public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerViewSelectedProducts.SelectedProductViewHolder> {
+public class PurchasedProductsAdapter extends RecyclerView.Adapter<PurchasedProductsAdapter.SelectedProductViewHolder> {
     ArrayList<Product> data;
     Context context;
 
-    public RecyclerViewSelectedProducts(ArrayList<Product> data, Context context) {
+    public PurchasedProductsAdapter(ArrayList<Product> data, Context context) {
         this.data = data;
         this.context = context;
     }

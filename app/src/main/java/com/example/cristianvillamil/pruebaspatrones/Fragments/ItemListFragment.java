@@ -10,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.cristianvillamil.pruebaspatrones.Adapters.ProductsAdapter;
-import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 import com.example.cristianvillamil.pruebaspatrones.R;
+import com.example.cristianvillamil.pruebaspatrones.commons.adapters.ProductsAdapter;
+import com.example.cristianvillamil.pruebaspatrones.commons.domain.Product;
 
 import java.util.ArrayList;
 

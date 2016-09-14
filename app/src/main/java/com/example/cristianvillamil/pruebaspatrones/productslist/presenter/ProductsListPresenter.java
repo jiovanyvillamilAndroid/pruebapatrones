@@ -7,6 +7,4 @@ public interface ProductsListPresenter {
 
     void getProducts();
 
-    void onDestroy();
-
 }
